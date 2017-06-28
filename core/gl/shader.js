@@ -70,13 +70,26 @@ class Shader {
 
         if (Array.isArray(value)) {
             switch (value.length) {
-                case 1: this.gl.uniform1fv(location, new Float32Array(value)); break;
-                case 2: this.gl.uniform2fv(location, new Float32Array(value)); break;
-                case 3: this.gl.uniform3fv(location, new Float32Array(value)); break;
-                case 4: this.gl.uniform4fv(location, new Float32Array(value)); break;
-                case 9: this.gl.uniformMatrix3fv(location, false, new Float32Array(value)); break;
-                case 16: this.gl.uniformMatrix4fv(location, false, new Float32Array(value)); break;
-                default: throw 'dont know how to load uniform "' + name + '" of length ' + value.length;
+                case 1:
+                    this.gl.uniform1fv(location, new Float32Array(value));
+                    break;
+                case 2:
+                    this.gl.uniform2fv(location, new Float32Array(value));
+                    break;
+                case 3:
+                    this.gl.uniform3fv(location, new Float32Array(value));
+                    break;
+                case 4:
+                    this.gl.uniform4fv(location, new Float32Array(value));
+                    break;
+                case 9:
+                    this.gl.uniformMatrix3fv(location, false, new Float32Array(value));
+                    break;
+                case 16:
+                    this.gl.uniformMatrix4fv(location, false, new Float32Array(value));
+                    break;
+                default:
+                    throw 'dont know how to load uniform "' + name + '" of length ' + value.length;
             }
         } else if (Number.isInteger(value)) {
             this.gl.uniform1i(location, value);

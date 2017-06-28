@@ -14,20 +14,25 @@ class Texture {
      * @param format
      * @param type
      */
-    constructor(gl, width, height, format, type) {
+    constructor(gl, id) {
+        this.element = document.getElementById(id);
         this.gl = gl;
         this.id = this.gl.createTexture();
-        this.width = width;
-        this.height = height;
-        this.format = format;
-        this.type = type;
+        this.width = this.element.getBoundingClientRect().width;
+        this.height = this.element.getBoundingClientRect().height;
+        this.format = this.gl.RGBA;
+        this.type = this.gl.UNSIGNED_BYTE;
 
         this.gl.bindTexture(this.gl.TEXTURE_2D, this.id);
+        this.gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
-        if (width && height) this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.format, width, height, 0, this.format, this.type, null);
+        if (this.width && this.height) {
+            this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.format, this.format, this.gl.UNSIGNED_BYTE, this.element);
+            // this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.format, this.width, this.height, 0, this.format, this.type, this.element);
+        }
     }
 
     /**
@@ -36,18 +41,6 @@ class Texture {
      */
     getID() {
         return this.id;
-    }
-
-    /**
-     *
-     * @param element
-     */
-    load(element) {
-        let element_obj = document.getElementById(element);
-        this.width = element.width || element.videoWidth;
-        this.height = element.height || element.videoHeight;
-        this.gl.bindTexture(this.gl.TEXTURE_2D, this.id);
-        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.format, this.format, this.type, element_obj);
     }
 
     /**

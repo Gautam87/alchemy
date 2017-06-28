@@ -15,7 +15,7 @@ class Canvas {
         this.gl = null;
 
         try {
-            this.gl = this.canvas.getContext('experimental-webgl', { premultipliedAlpha: false });
+            this.gl = this.canvas.getContext('experimental-webgl', {premultipliedAlpha: false});
         } catch (e) {
             this.gl = null;
             throw 'This browser does not support WebGL';
