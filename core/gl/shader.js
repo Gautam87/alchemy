@@ -6,7 +6,7 @@
  *
  */
 class Shader {
-    /**
+     /**
      *
      * @param gl
      * @param vertexSource
@@ -15,7 +15,6 @@ class Shader {
     constructor(gl, vertexSource, fragmentSource) {
         this.gl = gl;
         this.program = this.gl.createProgram();
-        this.attachments = {};
 
         this.gl.attachShader(this.program, this.compileSource(this.gl.VERTEX_SHADER, vertexSource));
         this.gl.attachShader(this.program, this.compileSource(this.gl.FRAGMENT_SHADER, fragmentSource));
@@ -26,10 +25,16 @@ class Shader {
 
         this.vertexBuffer = this.gl.createBuffer();
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBuffer);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array([0, 0, 0, 1, 1, 0, 1, 1]), this.gl.STATIC_DRAW);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER,
+            new Float32Array(
+                [-1, -1, 0, 0,
+                 -1,  1, 0, 1,
+                  1, -1, 1, 0,
+                  1,  1, 1, 1]
+            ), this.gl.STATIC_DRAW);
 
         this.gl.useProgram(this.program);
-        this.vertexAttribute = gl.getAttribLocation(this.program, 'vertex');
+        this.vertexAttribute = gl.getAttribLocation(this.program, 'position');
     }
 
     /**
@@ -101,12 +106,29 @@ class Shader {
     /**
      *
      */
-    render() {
+    render(surface, textures) {
+        // Bind surface
+        surface.bind();
+        this.gl.viewport(0, 0, surface.getWidth(), surface.getHeight());
+
+        // Bind textures
+        for (let unit in textures) {
+            textures[unit].use(unit);
+        }
+
+        // Use shader and render
         this.gl.enableVertexAttribArray(this.vertexAttribute);
         this.gl.useProgram(this.program);
-
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBuffer);
-        this.gl.vertexAttribPointer(this.vertexAttribute, 2, this.gl.FLOAT, false, 0, 0);
+        this.gl.vertexAttribPointer(this.vertexAttribute, 4, this.gl.FLOAT, false, 0, 0);
         this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
+
+        // Unbind textures
+        for (let unit in textures) {
+            textures[unit].unuse(unit);
+        }
+
+        // Unbind surface
+        surface.unbind();
     }
 }

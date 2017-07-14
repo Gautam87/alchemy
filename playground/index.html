@@ -1,7 +1,9 @@
 <script src="../core/gl/shader.js"></script>
 <script src="../core/gl/texture.js"></script>
-<script src="../core/gl/framebuffer.js"></script>
-<script src="../core/gl/canvas.js"></script>
+<script src="../core/gl/surface.js"></script>
+<script src="../core/gl/hidden_surface.js"></script>
+<script src="../core/gl/visible_surface.js"></script>
+<script src="../core/filter/filter.js"></script>
 <script src="../core/camera/camera.js"></script>
 
 <script src="thirdparty/stats.js"></script>
@@ -21,8 +23,15 @@
 
 <div class="overlay">
     <div style="text-align: center">
-        <video id="video" width="480" height="320"></video>
-        <canvas id="canvas" width="480" height="320"></canvas>
+        <video id="video"></video>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div>
+        <button onclick="applyNoFilter()">No Filter</button>
+        <button onclick="applyGreyFilter()">Grey Filter</button>
+        <button onclick="applyHue()">Hue Filter</button>
+    </div>
+    <div id="dynamic">
     </div>
 </div>
 
