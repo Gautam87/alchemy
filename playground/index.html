@@ -6,32 +6,42 @@
 <script src="../core/filter/filter.js"></script>
 <script src="../core/camera/camera.js"></script>
 
+<script src="thirdparty/x3dom.js"></script>
+<script src="thirdparty/clmtrackr.js"></script>
 <script src="thirdparty/stats.js"></script>
+<script src="filters.js"></script>
 <script src="app.js"></script>
+<script src="loader.js"></script>
 
-<style>
-    .overlay {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        background: rgba(50, 50, 50, 1.0);
-        z-index: 10;
-    }
-</style>
+<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="thirdparty/x3dom.css"/>
 
-<div class="overlay">
-    <div style="text-align: center">
-        <video id="video"></video>
-        <canvas id="canvas"></canvas>
-    </div>
+<div class="controls">
+    <h1>Bobble Alchemy Playground</h1>
+
+    <h2>Filters</h2>
     <div>
-        <button onclick="applyNoFilter()">No Filter</button>
-        <button onclick="applyGreyFilter()">Grey Filter</button>
-        <button onclick="applyHue()">Hue Filter</button>
+        <button onclick="app.applyNoFilter()">No Filter</button>
+        <button onclick="app.applyGrayFilter()">Grey Filter</button>
+        <button onclick="app.applyHueFilter()">Hue Filter</button>
+        <button onclick="app.applyPosterFilter()">Poster Filter</button>
     </div>
-    <div id="dynamic">
+
+    <h2>Tracker</h2>
+    <div>
+        <button onclick="app.toggleTracker()">Toggle Tracker</button>
+        <button onclick="app.toggleTrackerLayerVisibility()">Toggle Feature Tracking View</button>
+        <button onclick="app.toggleGlassLayer()">Toggle Glasses Tracking View</button>
+        <button onclick="app.applyBlurFilter()">Blur Filter With Tracking</button>
+    </div>
+
+    <h2>Display</h2>
+    <div id="display" class="display_container">
+        <video id="video" width="640" height="480" class="hidden"></video>
+        <canvas id="filter_layer" width="640" height="480" class="overlay"></canvas>
+        <canvas id="tracker_layer" width="640" height="480" class="overlay"></canvas>
+        <x3d width='640' height='480' class="overlay" id="glasses_layer" style="display: none">
+            <scene><inline nameSpaceName="Glasses" mapDEFToID="true" url="assets/glasses.x3d"></inline></scene>
+        </x3d>
     </div>
 </div>
-

@@ -1,16 +1,24 @@
 /**
- * Created by kunaldawn on 24/6/17.
+ *
+ *   mm   ""#           #
+ *   ##     #     mmm   # mm    mmm   mmmmm  m   m
+ *  #  #    #    #"  "  #"  #  #"  #  # # #  "m m"
+ *  #mm#    #    #      #   #  #""""  # # #   #m#
+ * #    #   "mm  "#mm"  #   #  "#mm"  # # #   "#
+ *                                            m"
+ *                                           ""
+ * Author : Kunal Dawn (kunal@bobblekeyboard.com)
  */
 
 /**
- *
+ * This class manages shader pipeline for a filter.
  */
 class Shader {
      /**
-     *
-     * @param gl
-     * @param vertexSource
-     * @param fragmentSource
+     * Creates a shader with given vertex and fragment shader
+     * @param gl openGL context
+     * @param vertexSource Vertex shader source
+     * @param fragmentSource Fragment shader source
      */
     constructor(gl, vertexSource, fragmentSource) {
         this.gl = gl;
@@ -38,10 +46,11 @@ class Shader {
     }
 
     /**
+     * Compile vertex or fragment shader source
      *
-     * @param type
-     * @param source
-     * @returns {WebGLShader}
+     * @param type Type of the shader
+     * @param source Source for the shader
+     * @returns {WebGLShader} Shader program
      */
     compileSource(type, source) {
         let shader = this.gl.createShader(type);
@@ -54,7 +63,7 @@ class Shader {
     }
 
     /**
-     *
+     *  Destroy shader program
      */
     destroy() {
         this.gl.deleteProgram(this.program);
@@ -62,9 +71,10 @@ class Shader {
     }
 
     /**
+     * Set uniform value defined in the shader
      *
-     * @param name
-     * @param value
+     * @param name Name of the uniform
+     * @param value Value of the uniform
      */
     setUniform(name, value) {
         this.gl.useProgram(this.program);
@@ -104,7 +114,10 @@ class Shader {
     }
 
     /**
+     * Render the shader to a surface
      *
+     * @params surface Visible or Hidden surface
+     * @params textures List of textures that needs to be attached to the shader
      */
     render(surface, textures) {
         // Bind surface

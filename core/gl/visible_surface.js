@@ -1,5 +1,13 @@
 /**
- * Created by kunaldawn on 24/6/17.
+ *
+ *   mm   ""#           #
+ *   ##     #     mmm   # mm    mmm   mmmmm  m   m
+ *  #  #    #    #"  "  #"  #  #"  #  # # #  "m m"
+ *  #mm#    #    #      #   #  #""""  # # #   #m#
+ * #    #   "mm  "#mm"  #   #  "#mm"  # # #   "#
+ *                                            m"
+ *                                           ""
+ * Author : Kunal Dawn (kunal@bobblekeyboard.com)
  */
 
 /**
@@ -24,9 +32,24 @@ class VisibleSurface extends Surface {
         }
     }
 
+    /**
+     * Set size of the canvas
+     *
+     * @param width Width of the canvas
+     * @param height Height of the canvas
+     */
     setSize(width, height) {
         this.canvas.width = width;
         this.canvas.height = height;
+    }
+
+    /**
+     * Get canvas element instance
+     *
+     * @returns {Element|*} Element
+     */
+    getElement() {
+        return this.canvas;
     }
 
     /**

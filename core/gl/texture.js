@@ -1,18 +1,24 @@
 /**
- * Created by kunaldawn on 24/6/17.
+ *
+ *   mm   ""#           #
+ *   ##     #     mmm   # mm    mmm   mmmmm  m   m
+ *  #  #    #    #"  "  #"  #  #"  #  # # #  "m m"
+ *  #mm#    #    #      #   #  #""""  # # #   #m#
+ * #    #   "mm  "#mm"  #   #  "#mm"  # # #   "#
+ *                                            m"
+ *                                           ""
+ * Author : Kunal Dawn (kunal@bobblekeyboard.com)
  */
 
 /**
- *
+ * This class represents a OpenGL Texture
  */
 class Texture {
     /**
+     * Load an element as OpenGL texture
      *
-     * @param gl
-     * @param width
-     * @param height
-     * @param format
-     * @param type
+     * @param gl OpenGL context
+     * @param id ID of the element
      */
     constructor(gl, id) {
         this.element = document.getElementById(id);
@@ -44,7 +50,7 @@ class Texture {
     }
 
     /**
-     *
+     *  Destroy the texture
      */
     destroy() {
         this.gl.deleteTexture(this.id);
@@ -52,8 +58,9 @@ class Texture {
     }
 
     /**
+     * Bind the texture at given texture unit
      *
-     * @param unit
+     * @param unit Texture unit
      */
     use(unit) {
         if (unit in this.unit_mappings) {
@@ -63,8 +70,9 @@ class Texture {
     }
 
     /**
+     * Unbind the texture form given texture unit
      *
-     * @param unit
+     * @param unit Texture unit
      */
     unuse(unit) {
         if (unit in this.unit_mappings) {

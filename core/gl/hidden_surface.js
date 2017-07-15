@@ -1,16 +1,25 @@
 /**
- * Created by kunaldawn on 24/6/17.
+ *
+ *   mm   ""#           #
+ *   ##     #     mmm   # mm    mmm   mmmmm  m   m
+ *  #  #    #    #"  "  #"  #  #"  #  # # #  "m m"
+ *  #mm#    #    #      #   #  #""""  # # #   #m#
+ * #    #   "mm  "#mm"  #   #  "#mm"  # # #   "#
+ *                                            m"
+ *                                           ""
+ * Author : Kunal Dawn (kunal@bobblekeyboard.com)
  */
 
 /**
- *
+ * This class manages a hidden surface by using framebuffer
  */
 class HiddenSurface extends Surface {
     /**
+     * Create a new hidden surface
      *
-     * @param gl
-     * @param width
-     * @param height
+     * @param gl OpenGL context
+     * @param width Width of the surface
+     * @param height Height of the serface
      */
     constructor(gl, width, height) {
         super();
@@ -41,22 +50,23 @@ class HiddenSurface extends Surface {
     }
 
     /**
-     *
+     * Unbind the surface
      */
     unbind() {
         this.gl.bindTexture(this.gl.TEXTURE_2D, null);
     }
 
     /**
-     *
+     * Bind the surface
      */
     bind() {
         this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this.hiddenSurface);
     }
 
     /**
+     * Get texture from the surface
      *
-     * @returns {WebGLTexture|*}
+     * @returns {WebGLTexture|*} Texture of surface
      */
     getTexture() {
         return this.framebuffer_texture;

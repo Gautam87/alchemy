@@ -1,0 +1,21 @@
+.overlay {
+    position: absolute;
+}
+
+.overlay canvas {
+    position: relative;
+}
+
+.display_container {
+    position: relative;
+    padding-top: 10px;
+}
+
+.hidden {
+    visibility: hidden;
+    position: absolute;
+}
+
+.controls {
+    padding-top: 50px;
+}
